@@ -8,7 +8,7 @@ public:
     bool isValid(string s) {
         vector<char> st;
         char ch, remove_char;
-        int i;
+        int i, count;
         bool flow, ans = true;
         st.clear();
         if(s.length()&1==1){
@@ -29,6 +29,10 @@ public:
                 }
                 remove_char = st[st.size()-1];
                 st.pop_back();
+                count = remove_char + ch;
+                if(!(count==81 || count == 184 || count == 248)){
+                    return false;
+                }
             }
         }
         if(st.size()>0){
