@@ -8,18 +8,26 @@ public:
     int uniqueMorseRepresentations(vector<string>& words) {
         // string s[];
         vector<string> code = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
-        int i;
-        unordered_map<string, int> count;
-        for(i=0;i<code.size();i++){
-            cout << code[i] << endl;
+        int i, j;
+        unordered_map<string, int> transform;
+        string s = "";
+        for(i=0;i<words.size();i++){
+            s = "";
+            for(j=0;j<words[i].size();j++){
+                s+=code[words[i][j]-97];
+            }
+            transform[s] = 0;
         }
-        return 0;
+        return transform.size();
     }
 };
 
 int main(){
     Solution s1;
     vector<string> words = {"gin","zen","gig","msg"};
-    s1.uniqueMorseRepresentations(words);
+    // words = {"a"};
+    int ans;
+    ans = s1.uniqueMorseRepresentations(words);
+    cout << ans << endl;
     return 0;
 }
