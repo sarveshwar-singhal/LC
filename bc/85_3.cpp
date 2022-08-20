@@ -43,9 +43,9 @@ int main(int argc, char const *argv[])
     Solution s1;
     string s = "";
     vector<vector<int>> shifts;
-    shifts = {[0,1,0],[1,2,1],[0,2,1]};
-    s = "dztz";
-    int ans;
+    shifts = {{0,1,0},{1,2,1},{0,2,1}};
+    s = "abc";
+    string ans;
     ans = s1.shiftingLetters(s, shifts);
     // cout << s.size() << " " << s.length() << endl;
     cout << ans << endl;

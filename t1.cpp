@@ -1,5 +1,13 @@
 #include<iostream>
+#include<vector>
 using namespace std;
+
+//function to check for 2d vectors
+void vector2d(){
+    vector<vector<int>> vec2d;
+    vec2d = {{1,2,3},{2,3,4},{3,4,5}};
+    
+}
 
 int main(int argc, char const *argv[])
 {
