@@ -29,7 +29,9 @@ public:
             if(li[i] < 1){
                 li[i] += 26;
             }
-            out += char(li[i] + 96);
+            // out += char(li[i] + 96);
+            //Big Blunder. it will convert digit to string and not digit to char and then string.
+            // out += to_string(li[i] + 96);
         }
         return out;
     }
