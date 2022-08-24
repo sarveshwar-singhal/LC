@@ -29,11 +29,14 @@ public:
             if(li[i] < 1){
                 li[i] += 26;
             }
+            //below out throwing TLE
             // out += char(li[i] + 96);
             //Big Blunder. it will convert digit to string and not digit to char and then string.
             // out += to_string(li[i] + 96);
+            //try 3
+            s[i] = char(li[i] + 96);
         }
-        return out;
+        return s;
     }
 };
 
