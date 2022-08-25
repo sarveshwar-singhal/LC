@@ -2,12 +2,43 @@
 #include<vector>
 #include<string>
 #include<cstring>
+#include<unordered_map>
 using namespace std;
 
 
 class Solution {
 public:
+
     string shiftingLetters(string s, vector<vector<int>>& shifts) {
+        unordered_map<int, int> sby;
+        int i, j;
+        int dir;
+        for(auto x: shifts){
+            dir = 1;
+            if(x[2] == 0){
+                dir = -1;
+            }
+            for(i=x[0];i<=x[1];i++){
+                if(sby.find(i) == sby.end()){
+                    sby[i] = 0;
+                }
+                sby[i] += dir;
+            }
+        }
+        int temp;
+        for(auto x: sby){
+            temp = s[x.first] - 96;
+            temp += x.second;
+            temp %= 26;
+            if(temp < 1){
+                temp += 26;
+            }
+            s[x.first] = temp + 96;
+        }
+        return s;
+    }
+
+    string shiftingLetters1(string s, vector<vector<int>>& shifts) {
         vector<int> li(s.length(), 0);
         int i, j;
         for(i=0;i<li.size();i++){
