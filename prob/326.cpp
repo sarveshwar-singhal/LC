@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
     // bool ans = s1.isPowerOfThree(n);
     // cout << ans << endl;
     // cout << false << endl;
-    cout << s1.isPowerOfThree(n) << endl;
+    cout << s1.isPowerOfThree3(n) << endl;
     cout << s1.isPowerOfThree1(n) << endl;
     return 0;
 }
