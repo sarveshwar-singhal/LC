@@ -5,7 +5,7 @@ class Solution {
 public:
     int mostBooked(int n, vector<vector<int>>& meetings) {
         vector<int> lastTime(n, 0);
-        vector<int> count(n, 0);
+        vector<int> freq(n, 0);
         sort(meetings.begin(), meetings.end());
         int i;
         int pos_min, pos, val_min;
@@ -37,13 +37,13 @@ public:
                     lastTime[pos] += x[1] - x[0];
                 }
             }
-            count[pos] +=1;
+            freq[pos] +=1;
         }
         pos = -1;
         int maxi = INT32_MIN;
-        for(i=0;i<count.size();i++){
-            if(maxi < count[i]){
-                maxi = count[i];
+        for(i=0;i<freq.size();i++){
+            if(maxi < freq[i]){
+                maxi = freq[i];
                 pos = i;
             }
         }
@@ -55,8 +55,8 @@ int main(int argc, char const *argv[])
 {
     vector<vector<int>> meetings = {{0,10},{1,5},{2,7},{3,4}};
     int n;
-    n=2;
-    // meetings = {{1, 20}, {2, 10}, {3, 5}, {4, 9}, {6, 8}};
+    n=3;
+    meetings = {{1, 20}, {2, 10}, {3, 5}, {4, 9}, {6, 8}};
     // meetings = {{0, 10}, {1, 2}, {12, 14}, {13, 15}};
     // meetings = {{18, 19}, {3, 12}, {17, 19}, {2, 13}, {7, 10}};
     Solution s1;
