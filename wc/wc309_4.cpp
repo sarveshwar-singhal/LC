@@ -78,10 +78,8 @@ public:
     }
 
     int mostBooked(int n, vector<vector<int>>& meetings) {
-        // vector<unsigned long long> lastTime(n, 0);
-        unsigned long long lastTime[n] = {0};
-        // vector<unsigned int> freq(n, 0);
-        unsigned long long freq[n] = {0};
+        vector<unsigned long long> lastTime(n, 0);
+        vector<unsigned int> freq(n, 0);
         unsigned long long pos_min;
         sort(meetings.begin(), meetings.end());
         int i;
@@ -105,19 +103,17 @@ public:
                 }
             }
             pos = min(pos, val_min);
-            // cout << "min index found" << endl;
             if(lastTime[pos] == 0){
                 lastTime[pos] = x[1];
             } else{ 
                 if(x[0] >= lastTime[pos]){
                     lastTime[pos] = x[1];
                 } else{
-                    lastTime[pos] += (x[1] - x[0]);
+                    lastTime[pos] += x[1] - x[0];
                 }
             }
             freq[pos] +=1;
         }
-        // cout << "value of pos now " << pos << endl;
         pos = 0;
         int maxi = freq[0];
         for(i=1;i<n;i++){
@@ -151,12 +147,12 @@ int main(int argc, char const *argv[])
     // meetings = {{0, 10}, {1, 2}, {12, 14}, {13, 15}};
     // meetings = {{18, 19}, {3, 12}, {17, 19}, {2, 13}, {7, 10}};
     Solution s1;
-    string filename = "/home/new/vscode/DsaEssentials/self/2402_input.txt";
+    string filename = "2402_input.txt";   //filepath
     s1.readData(filename);
     int ans;
     // cout << s1.rooms << endl;
-    // ans = s1.mostBooked(s1.rooms, s1.meet);
-    ans = s1.mostBooked(n, meetings);
+    ans = s1.mostBooked(s1.rooms, s1.meet);
+    // ans = s1.mostBooked(n, meetings);
     cout << ans << endl;
     // cout << s1.mostBooked(n, meetings) << endl;
 
