@@ -6,11 +6,47 @@ public:
 
     int minGroups(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
+        int sz = intervals.size();
+        // vector<vector<int>> arr(intervals.size()+1, vector<int>(intervals.size(), 0));
+        vector<vector<int>> arr(1, vector<int>(sz, 0));
+        vector<int> curr_row(sz, 0);
+        // int arr[sz+1][sz] = {0};
+        int prev;
+        int done = 0;
+        for(int i=1;i<=sz;i++){
+            prev = 0;
+            for(int j=0;j<sz;j++){
+                if(arr[i-1][j] == 1){
+                    // curr_row.push_back(1);
+                    curr_row[j] = 1;
+                    // arr[i][j] = 1;
+                    continue;
+                }
+                if(intervals[j][0] > prev){
+                    // arr[i][j] = 1;
+                    // curr_row.push_back(1);
+                    curr_row[j] =1;
+                    prev = intervals[j][1];
+                    done +=1;
+                }
+            }
+            arr.push_back(curr_row);
+            curr_row=vector<int>(sz, 0);
+            // curr_row.erase();
+            if(done==sz) break;
+        }
+        return arr.size() - 1;
+    }
+
+    //better than 1, but memory limit exceeded
+    int minGroups2(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
         vector<vector<int>> arr(intervals.size()+1, vector<int>(intervals.size(), 0));
         int sz = intervals.size();
         // int arr[sz+1][sz] = {0};
         int prev;
         int done = 0;
+        int cnt = 0;
         for(int i=1;i<=sz;i++){
             prev = 0;
             for(int j=0;j<sz;j++){
@@ -24,16 +60,18 @@ public:
                     done +=1;
                 }
             }
+            cnt +=1;
             if(done==sz) break;
         }
-        int cnt = 0;
+        return cnt;
         int i;
-        for(i=sz;i>=0;i--){
+        for(i=sz;i>0;i--){
             if(arr[i][0] == 1){
                 return i;
+                break;
             }
         }
-        return i+1;
+        return i;
         /*  for(int i=1;i<=intervals.size();i++){
             for(int j=0;j<intervals.size();j++){
                 if((arr[i][j] & 1) == 1){
@@ -45,6 +83,7 @@ public:
         // return cnt;
     }
 
+    //some test case passes; TLE
     int minGroups1(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
         vector<int> taken(intervals.size(), 0);
