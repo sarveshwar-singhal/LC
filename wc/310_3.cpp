@@ -4,7 +4,62 @@ using namespace std;
 class Solution {
 public:
 
-    int minGroups(vector<vector<int>>& intervals) {
+    //trying stack approach having indexes of unused element.
+    int minGroups4(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
+        int sz = intervals.size(), sz1;
+        int i, j;
+        int cnt=0, done = 0, prev = 0;
+        queue<int> unused;
+        for(i=0;i<sz;i++) unused.push(i);
+        while(true){
+            prev = 0;
+            sz1 = unused.size();
+            for(i=0;i<sz1;i++){
+                j = unused.front();
+                unused.pop();
+                if(intervals[j][0] > prev){
+                    prev = intervals[j][1];
+                    done+=1;
+                    continue;
+                }
+                unused.push(j);
+            }
+            cnt+=1;
+            if(done==sz) break;
+        }
+        return cnt;
+    }
+
+    //trying with single row maintaining used/unused - nothing major changed. still TLE
+    int minGroups3(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
+        int sz = intervals.size();
+        vector<int> used(sz, 0);
+        int i, j;
+        int cnt=0, done = 0, prev = 0;
+
+        for(i=0;i<sz;i++){
+            prev = 0;
+            for(j=0;j<sz;j++){
+                if(used[j]==1){
+                    continue;
+                }
+                if(used[j]==0 && intervals[j][0] > prev){
+                    prev = intervals[j][1];
+                    used[j] = 1;
+                    done+=1;
+                }
+            }
+            cnt+=1;
+            if(done==sz) break;
+        }
+        return cnt;
+    }
+
+    //some test cases passes. TLE for some cases
+    //to avoid size limit exceeeded not declaring n*n at one, rather appending after each iteration
+    int minGroups2(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
         int sz = intervals.size();
         // vector<vector<int>> arr(intervals.size()+1, vector<int>(intervals.size(), 0));
@@ -39,7 +94,7 @@ public:
     }
 
     //better than 1, but memory limit exceeded
-    int minGroups2(vector<vector<int>>& intervals) {
+    int minGroups1(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
         vector<vector<int>> arr(intervals.size()+1, vector<int>(intervals.size(), 0));
         int sz = intervals.size();
@@ -84,7 +139,7 @@ public:
     }
 
     //some test case passes; TLE
-    int minGroups1(vector<vector<int>>& intervals) {
+    int minGroups(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
         vector<int> taken(intervals.size(), 0);
         int ans = 0;
@@ -132,6 +187,6 @@ int main(int argc, char const *argv[])
     vector<vector<int>> intervals = {{5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}};
     Solution s1;
     // temp_check();
-    cout << s1.minGroups(intervals) << endl;
+    cout << s1.minGroups4(intervals) << endl;
     return 0;
 }
