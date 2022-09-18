@@ -6,23 +6,23 @@ public:
 
     //trying stack approach having indexes of unused element.
     int minGroups4(vector<vector<int>>& intervals) {
-        sort(intervals.begin(), intervals.end());
+        // sort(intervals.begin(), intervals.end());
         int sz = intervals.size(), sz1;
         int i, j;
-        int cnt=0, done = 0, prev = 0;
+        int cnt=0, done = 0, left = 0, right = 0;
         queue<int> unused;
         for(i=0;i<sz;i++) unused.push(i);
         while(true){
-            prev = 0;
+            left = INT32_MAX; right = 0;
             sz1 = unused.size();
             for(i=0;i<sz1;i++){
                 j = unused.front();
                 unused.pop();
-                if(intervals[j][0] > prev){
-                    prev = intervals[j][1];
+                if(intervals[j][0] > right){
+                    right = intervals[j][1];
                     done+=1;
                     continue;
-                }
+                } else if(intervals[j][1])
                 unused.push(j);
             }
             cnt+=1;
