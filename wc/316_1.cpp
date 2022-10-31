@@ -10,6 +10,9 @@ public:
         t1e = stoi(event1[1].substr(0, 2))*60 + stoi(event1[1].substr(3, 2));
         t2s = stoi(event2[0].substr(0, 2))*60 + stoi(event2[0].substr(3, 2));
         t2e = stoi(event2[1].substr(0, 2))*60 + stoi(event2[1].substr(3, 2));
-        
+        if(t1e < t2s or t2e < t1s){
+            return false;
+        }
+        return true;
     }
 };

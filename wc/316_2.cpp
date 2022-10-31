@@ -6,8 +6,8 @@ class Solution {
 public:
 
     
-
     int subarrayGCD(vector<int>& nums, int k) {
+
         int i, j;
         for(i=0;i<nums.size();i++){
             if(nums[i] % k ==0){
