@@ -45,15 +45,44 @@ public:
         }
         return ans;
     }
+
+    vector<int> findBall_1(vector<vector<int>>& grid) {
+        int i, j, k;
+        int col = grid[0].size(), row = grid.size();
+        vector<int> ans(col, -1);
+        for(j=0;j<col;j++){
+            k=j;
+            for(i=0;i<row;i++){
+                if(k==0 and grid[i][k]==-1){
+                    break;
+                }
+                if(k==col-1 and grid[i][k]==1){
+                    break;
+                }
+
+                if(grid[i][k]==1 and grid[i][k+1]==1){
+                    k+=1;
+                } else if(grid[i][k]==-1 and grid[i][k-1]==-1){
+                    k-=1;
+                }else{
+                    break;
+                }
+                if(i==row-1){
+                    ans[j] = k;
+                }
+            }
+        }
+        return ans;
+    }
 };
 
 int main(){
     vector<vector<int>> grid = {{1,1,1,-1,-1},{1,1,1,-1,-1},{-1,-1,-1,1,1},{1,1,1,1,-1},{-1,-1,-1,-1,-1}};
     vector<int> ans;
     Solution s1;
-    grid = {{-1}};
-    grid = {{1,1,1,1,1,1},{-1,-1,-1,-1,-1,-1},{1,1,1,1,1,1},{-1,-1,-1,-1,-1,-1}};
-    ans = s1.findBall(grid);
+    // grid = {{-1}};
+    // grid = {{1,1,1,1,1,1},{-1,-1,-1,-1,-1,-1},{1,1,1,1,1,1},{-1,-1,-1,-1,-1,-1}};
+    ans = s1.findBall_1(grid);
     for(auto x: ans){
         cout << x << " ";
     }
