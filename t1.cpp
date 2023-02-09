@@ -11,6 +11,10 @@ void vector2d(){
 
 int main(int argc, char const *argv[])
 {
+    int a= 10;
+    cout << a << "    " << &a << endl;
+    a = 20;
+    cout << a << "    " << &a << endl;
     int arr[3] = {0};
     int i;
     for(i=0;i<3;i++){
