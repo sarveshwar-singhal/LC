@@ -7,7 +7,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> maxPoints(vector<vector<int>>& grid, vector<int>& queries) {
-        vector<int> ans{queries.size(), 0};
+        // vector<int> ans{queries.size(), 0};
         
     }
 };
