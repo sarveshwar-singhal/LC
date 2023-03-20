@@ -5,7 +5,14 @@
 using namespace std;
 
 class Solution {
+    int gvar1;
 public:
+    //random method to check for class level variables
+    int getGvar1(){
+        this->gvar1 = 1;
+        return this->gvar1;
+    }
+
     int maxScore(vector<int>& nums) {
         int i, cnt=0;
         long sum=0;
@@ -52,5 +59,6 @@ int main(int argc, char const *argv[])
     vector<int> nums = {2,-1,0,1,-3,3,-3};
     Solution s1;
     cout << s1.maxScore(nums) << endl;
+    cout << s1.getGvar1() << endl;
     return 0;
 }
