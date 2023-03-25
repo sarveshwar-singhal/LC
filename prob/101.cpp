@@ -40,9 +40,9 @@ public:
             return;
         }
         //rec case
-        traverseTreeRight(root->left);
-        right.push_back(root->val);
         traverseTreeRight(root->right);
+        right.push_back(root->val);
+        traverseTreeRight(root->left);
     }
 
     bool isSymmetric(TreeNode* root) {
